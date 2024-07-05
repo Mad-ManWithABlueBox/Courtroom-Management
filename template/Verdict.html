@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Case Verdict
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-dattaable">
+    
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/dattaable/css/style.css">
+
+    <!-- Specific CSS goes HERE -->
+    
+
+</head>
+
+<body>
+    <div class="auth-wrapper" >
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card" style="width: 32rem; opacity: 0.8;" >
+                <div class="card-body text-center">
+                    <h3 class="mb-4">Evidence</h3>
+                    <br />
+                    <br />
+
+                    <form id="register" method="post" action="#">
+                        {% csrf_token %}
+
+                        <h3>Case Verdict</h3>
+                        <br><br>
+                        <h5 class="m-0" style="text-align: left;"> Case Type: {{case.CaseType}} </h5>
+                        <br>
+                        <h5 class="m-0" style="text-align: left;"> Case Info: {{case.CaseInfo}} </h5>
+                        <br>
+                        {% for law in Lawyers %}
+                            {% if case.DefenseLawyerEmail == law %}
+                            <h5 class="m-0" style="text-align: left;"> Case Defense Lawyer Email ID: {{ law.Email }} </h5>
+                            <br>
+                            <h5 class="m-0" style="text-align: left;"> Case Defense Lawyer Name: {{ law.Name }} </h5>
+                            <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for law in Lawyers %}
+                            {% if case.ProsecutorLawyerEmail == law %}
+                            <h5 class="m-0" style="text-align: left;"> Case Prosecutor Lawyer Email ID: {{ law.Email }} </h5>
+                                <br>
+                            <h5 class="m-0" style="text-align: left;"> Case Prosecutor Lawyer Name: {{ law.Name }} </h5>
+                                <br>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for client in Clients %}
+                            {% if case.DefenseClientEmail == client %}
+                                <h5 class="m-0" style="text-align: left;">  Case Defense Client Email ID: {{ client.Email }} </h5>
+                                    <br>
+                                <h5 class="m-0" style="text-align: left;">  Case Defense Client Name: {{ client.Name }} </h5>
+                                    <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for client in Clients %}
+                            {% if case.ProsecutorClientEmail == client %}
+                                <h5 class="m-0" style="text-align: left;">  Case Prosecutor Client Email ID: {{ client.Email }} </h5>
+                                    <br>
+                                <h5 class="m-0" style="text-align: left;">  Case Prosecutor Client Name: {{ client.Name }} </h5>
+                                    <br>
+                            {% endif %}
+                        {% endfor %}
+                        {% for evi in Evidence %}
+                            <h5 class="m-0" style="text-align: left;">  Case Evidence: {{ evi.EvidenceInfo }} </h5>
+                            <br>
+                        {% endfor %}
+                        <input type="text" placeholder="Verdict" id="Verdict" name="Verdict" class="form-control">
+                        <br>
+                        <button class="btn btn-primary shadow-2 mb-4">Finalize Verdict</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Required Js -->
+    <script src="https://appsrv1-147a1.kxcdn.com/dattaable/js/vendor-all.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/dattaable/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/dattaable/js/pcoded.min.js"></script>
+    <!-- Specific Page JS goes HERE  -->
+
+</body>
+</html>
+
